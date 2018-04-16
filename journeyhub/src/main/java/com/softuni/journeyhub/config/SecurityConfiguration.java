@@ -1,0 +1,42 @@
+package com.softuni.journeyhub.config;
+
+import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+
+@Configuration
+@EnableWebSecurity
+public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
+
+    @Override
+    public void configure(WebSecurity web) throws Exception {
+        web
+                .ignoring()
+                .antMatchers("/scripts/**", "/styles/**");
+    }
+
+    @Override
+    protected void configure(HttpSecurity http) throws Exception {
+                http
+                .authorizeRequests()
+                .antMatchers("/", "/login", "/register").permitAll()
+
+                .anyRequest().authenticated()
+                .and()
+                .csrf().disable()
+                .formLogin().loginPage("/login")
+                        .defaultSuccessUrl("/",true)
+                        .failureUrl("/login?error=true")
+                .usernameParameter("username")
+                .passwordParameter("password")
+                .and()
+                        .logout().permitAll().logoutUrl("/logout")
+                        .logoutSuccessUrl("/")
+                .and()
+                        .exceptionHandling().accessDeniedPage("/unauthorized");
+
+
+    }
+}
