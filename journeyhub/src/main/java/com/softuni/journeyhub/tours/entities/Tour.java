@@ -29,6 +29,10 @@ public class Tour {
 
     private Double rating;
 
+    private Boolean suggested;
+
+    private Long creator;
+
     public Tour() {
     }
 
@@ -70,5 +74,13 @@ public class Tour {
 
     public void setRating(Double rating) {
         this.rating = rating;
+    }
+
+    public Boolean getSuggested() {
+        return suggested;
+    }
+
+    public void setSuggested(Boolean suggested) {
+        this.suggested = suggested;
     }
 }

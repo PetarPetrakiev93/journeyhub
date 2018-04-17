@@ -1,10 +1,13 @@
 package com.softuni.journeyhub.users.entities;
 
+import com.softuni.journeyhub.events.entities.Event;
+import com.softuni.journeyhub.places.entities.Place;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import java.util.Collection;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -31,6 +34,10 @@ public class User implements UserDetails{
 
     @ManyToMany(fetch = FetchType.EAGER)
     private Set<Role> authorities;
+
+    private List<Place> likedPlaces;
+
+    private List<Event> likedEvents;
 
 
     public User() {

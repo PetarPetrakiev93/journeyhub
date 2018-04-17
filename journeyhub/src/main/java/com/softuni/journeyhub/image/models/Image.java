@@ -10,7 +10,7 @@ import javax.persistence.*;
 public class Image {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private String id;
+    private Long id;
 
     private String name;
 
@@ -27,17 +27,16 @@ public class Image {
     public Image() {
     }
 
-    public Image(String id, String name, String url) {
-        this.setId(id);
+    public Image(String name, String url) {
         this.setName(name);
         this.setUrl(url);
     }
 
-    public String getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

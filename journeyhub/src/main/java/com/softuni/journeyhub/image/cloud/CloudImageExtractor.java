@@ -6,10 +6,7 @@ import org.springframework.cache.annotation.CachePut;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
 
 @Component
 public class CloudImageExtractor {
@@ -99,7 +96,7 @@ public class CloudImageExtractor {
             String fileName = singleFileData.get("name").toString();
             String fileUrl = "https://" + host + filePath;
 
-            Image image = new Image(UUID.randomUUID().toString(), fileName, fileUrl);
+            Image image = new Image(fileName, fileUrl);
 
             resultImages.add(image);
         }

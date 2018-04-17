@@ -17,6 +17,8 @@ public class Event {
 
     private String name;
 
+    private String text;
+
     private String type;
 
     private Date date;
@@ -27,8 +29,7 @@ public class Event {
 
     private Double rating;
 
-    @OneToMany(mappedBy = "event", targetEntity = Image.class, fetch = FetchType.EAGER,
-            cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "event", targetEntity = Image.class, cascade = CascadeType.ALL)
     private List<Image> images;
 
     @ManyToMany(mappedBy = "events", targetEntity = Tour.class, cascade = CascadeType.ALL)
@@ -99,5 +100,13 @@ public class Event {
 
     public void setTours(List<Tour> tours) {
         this.tours = tours;
+    }
+
+    public String getText() {
+        return text;
+    }
+
+    public void setText(String text) {
+        this.text = text;
     }
 }

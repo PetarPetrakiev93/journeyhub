@@ -1,6 +1,7 @@
 package com.softuni.journeyhub.locations.entities;
 
 import com.softuni.journeyhub.events.entities.Event;
+import com.softuni.journeyhub.places.entities.Place;
 
 import javax.persistence.*;
 import java.util.List;
@@ -19,9 +20,11 @@ public class Location {
 
     private Double latitude;
 
-    @OneToMany(mappedBy = "location", targetEntity = Event.class, fetch = FetchType.EAGER,
-            cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "location", targetEntity = Event.class, cascade = CascadeType.ALL)
     private List<Event> events;
+
+    @OneToMany(mappedBy = "location", targetEntity = Place.class, cascade = CascadeType.ALL)
+    private List<Place> places;
 
     public Location() {
     }
@@ -64,5 +67,13 @@ public class Location {
 
     public void setLatitude(Double latitude) {
         this.latitude = latitude;
+    }
+
+    public List<Place> getPlaces() {
+        return places;
+    }
+
+    public void setPlaces(List<Place> places) {
+        this.places = places;
     }
 }

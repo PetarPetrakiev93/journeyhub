@@ -16,14 +16,15 @@ public class Place {
 
     private String name;
 
+    private String text;
+
     @ManyToOne
     @JoinColumn(name = "location_id", referencedColumnName = "id")
     private Location location;
 
     private Double rating;
 
-    @OneToMany(mappedBy = "place", targetEntity = Image.class, fetch = FetchType.EAGER,
-            cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "place", targetEntity = Image.class, cascade = CascadeType.ALL)
     private List<Image> images;
 
     @ManyToMany(mappedBy = "places", targetEntity = Tour.class, cascade = CascadeType.ALL)
@@ -78,5 +79,13 @@ public class Place {
 
     public void setTours(List<Tour> tours) {
         this.tours = tours;
+    }
+
+    public String getText() {
+        return text;
+    }
+
+    public void setText(String text) {
+        this.text = text;
     }
 }
