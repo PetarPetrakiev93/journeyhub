@@ -3,6 +3,7 @@ package com.softuni.journeyhub.places.entities;
 import com.softuni.journeyhub.image.models.Image;
 import com.softuni.journeyhub.locations.entities.Location;
 import com.softuni.journeyhub.tours.entities.Tour;
+import com.softuni.journeyhub.users.entities.User;
 
 import javax.persistence.*;
 import java.util.List;
@@ -29,6 +30,10 @@ public class Place {
 
     @ManyToMany(mappedBy = "places", targetEntity = Tour.class, cascade = CascadeType.ALL)
     private List<Tour> tours;
+
+    @ManyToMany(mappedBy = "likedPlaces", targetEntity = User.class, cascade = CascadeType.ALL)
+    private List<User> users;
+
 
     public Place() {
     }

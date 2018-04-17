@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Location</title>
+    <div th:replace="fragments/CDN :: bootstrap"></div>
+    <div th:replace="fragments/CDN :: jquery"></div>
+    <div th:replace="fragments/CDN :: bootstrapjs"></div>
+    <div th:replace="fragments/CDN :: style"></div>
+</head>
+
+<body>
+<div class="container-fluid">
+    <div th:replace="fragments/head :: header"></div>
+</div>
+<div class="legend text-center" style="margin-top: 70px">
+    <h2>Login</h2>
+</div>
+<hr class="my-2">
+<div class="container-fluid">
+    <div class="row justify-content-center">
+        <div class="form-holder text-center">
+            <h1>Add Location</h1>
+            <form class="form-inline" th:action="@{/location/add}" th:method="post" th:object="${locationBindingModel}">
+                <fieldset>
+                    <div class="form-group" th:classappend="${#fields.hasErrors('name')}? 'is-invalid':''">
+                        <label for="name">Name</label>
+                        <input type="text" class="form-control" id="name" th:field="*{name}"
+                               th:classappend="${#fields.hasErrors('name')}? 'is-invalid':''"/>
+                        <div class="invalid-feedback" th:each="error : ${#fields.errors('name')}" th:text="${error}">
+                            Error Message
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="longitude">Longitude</label>
+                        <input type="number" step=0.001 class="form-control" id="longitude" th:field="*{longitude}"/>
+                    </div>
+                    <div class="form-group">
+                        <label for="latitude">Latitude</label>
+                        <input type="number" step=0.001 class="form-control" id="latitude" th:field="*{latitude}"/>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </fieldset>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>

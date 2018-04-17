@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>All Locations</title>
+    <div th:replace="fragments/CDN :: bootstrap"></div>
+    <div th:replace="fragments/CDN :: jquery"></div>
+    <div th:replace="fragments/CDN :: bootstrapjs"></div>
+    <div th:replace="fragments/CDN :: style"></div>
+</head>
+
+<body>
+<div class="container-fluid">
+    <div th:replace="fragments/head :: header"></div>
+</div>
+<div>
+    <div class="container-fluid" style="margin-top:70px">
+        <table class="table table-hover">
+            <tr>
+                <th>#</th>
+                <th>Name</th>
+                <th>Longitude</th>
+                <th>Latitude</th>
+            </tr>
+            <tr th:each="location,index : ${locationBindingModels}" th:object="${location}">
+                <td th:text="${index.count}"></td>
+                <td th:text="*{name}"></td>
+                <td th:text="*{longitude}"></td>
+                <td th:text="*{latitude}"></td>
+            </tr>
+        </table>
+    </div>
+</div>
+</body>
+</html>

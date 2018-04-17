@@ -3,6 +3,7 @@ package com.softuni.journeyhub.events.entities;
 import com.softuni.journeyhub.image.models.Image;
 import com.softuni.journeyhub.locations.entities.Location;
 import com.softuni.journeyhub.tours.entities.Tour;
+import com.softuni.journeyhub.users.entities.User;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -34,6 +35,9 @@ public class Event {
 
     @ManyToMany(mappedBy = "events", targetEntity = Tour.class, cascade = CascadeType.ALL)
     private List<Tour> tours;
+
+    @ManyToMany(mappedBy = "likedEvents", targetEntity = User.class, cascade = CascadeType.ALL)
+    private List<User> users;
 
     public Event() {
     }

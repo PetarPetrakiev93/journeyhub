@@ -35,8 +35,16 @@ public class User implements UserDetails{
     @ManyToMany(fetch = FetchType.EAGER)
     private Set<Role> authorities;
 
+    @ManyToMany(cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
+    @JoinTable(name = "users_places",
+            joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "place_id", referencedColumnName = "id"))
     private List<Place> likedPlaces;
 
+    @ManyToMany(cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
+    @JoinTable(name = "users_events",
+            joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "event_id", referencedColumnName = "id"))
     private List<Event> likedEvents;
 
 
@@ -124,4 +132,19 @@ public class User implements UserDetails{
         this.password = password;
     }
 
+    public List<Place> getLikedPlaces() {
+        return likedPlaces;
+    }
+
+    public void setLikedPlaces(List<Place> likedPlaces) {
+        this.likedPlaces = likedPlaces;
+    }
+
+    public List<Event> getLikedEvents() {
+        return likedEvents;
+    }
+
+    public void setLikedEvents(List<Event> likedEvents) {
+        this.likedEvents = likedEvents;
+    }
 }

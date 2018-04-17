@@ -17,9 +17,9 @@
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                     <a class="dropdown-item" href="/tours/build">Build Tour</a>
-                    <div sec:authorize="hasAnyRole('MODERATOR', 'ADMIN')">
+                    <!--<div sec:authorize="hasAnyRole('MODERATOR', 'ADMIN')">-->
                     <a class="dropdown-item" href="/tours/suggested">Suggested Tour</a>
-                    </div>
+                    <!--</div>-->
                 </div>
                 </div>
             </li>
@@ -30,9 +30,9 @@
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <a class="dropdown-item" href="/places">All Places</a>
-                        <div sec:authorize="hasAnyRole('MODERATOR', 'ADMIN')">
+                        <!--<div sec:authorize="hasAnyRole('MODERATOR', 'ADMIN')">-->
                             <a class="dropdown-item" href="/place/add">Add Place</a>
-                        </div>
+                        <!--</div>-->
                     </div>
                 </div>
             </li>
@@ -43,15 +43,28 @@
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <a class="dropdown-item" href="/events">All Events</a>
-                        <div sec:authorize="hasAnyRole('MODERATOR', 'ADMIN')">
+                        <!--<div sec:authorize="hasAnyRole('MODERATOR', 'ADMIN')">-->
                             <a class="dropdown-item" href="/event/add">Add Event</a>
-                        </div>
+                        <!--</div>-->
                     </div>
                 </div>
             </li>
-            <li class="nav-item" sec:authorize="hasRole('ADMIN')">
-                <a class="nav-link nav-link-white" href="/users">Users</a>
+            <!--<div sec:authorize="hasAnyRole('MODERATOR', 'ADMIN')">-->
+            <li class="nav-item dropdown">
+                <div class="dropdown-show">
+                    <a class="nav-link dropdown-toggle nav-link-white" href="/" id="navbarDropdown" data-toggle="dropdown">
+                        Locations
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="/locations">All Locations</a>
+                        <a class="dropdown-item" href="/location/add">Add Location</a>
+                    </div>
+                </div>
             </li>
+            <!--</div>-->
+            <!--<li class="nav-item" sec:authorize="hasRole('ADMIN')">-->
+                <a class="nav-link nav-link-white" href="/users">Users</a>
+            <!--</li>-->
         </ul>
         <div>
             <div sec:authorize="isAnonymous()">
@@ -67,7 +80,7 @@
             <div sec:authorize="isAuthenticated()">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item active">
-                        <a class="nav-link nav-link-white" th:href="/tours/mine">My Tours</a>
+                        <a class="nav-link nav-link-white" href="/tours/mine">My Tours</a>
                     </li>
                     <li class="nav-item active">
                        <span class="nav-link nav-link-white" sec:authentication="name">Welcome, name</span>

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Unauthorized</title>
+    <div th:replace="fragments/CDN :: bootstrap"></div>
+    <div th:replace="fragments/CDN :: jquery"></div>
+    <div th:replace="fragments/CDN :: bootstrapjs"></div>
+    <div th:replace="fragments/CDN :: style"></div>
+</head>
+
+<body>
+<div class="container-fluid">
+    <div th:replace="fragments/head :: header"></div>
+</div>
+<div class="container mt-4">
+   <h2 class="danger">You have no access to this page</h2>
+</div>
+</body>
+</html>
