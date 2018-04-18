@@ -30,6 +30,8 @@ public class Event {
 
     private Double rating;
 
+    private Long ratingUpdates;
+
     @OneToMany(mappedBy = "event", targetEntity = Image.class, cascade = CascadeType.ALL)
     private List<Image> images;
 
@@ -40,6 +42,8 @@ public class Event {
     private List<User> users;
 
     public Event() {
+        this.rating = 0.0D;
+        this.ratingUpdates = 0L;
     }
 
     public List<Image> getImages() {
@@ -112,5 +116,21 @@ public class Event {
 
     public void setText(String text) {
         this.text = text;
+    }
+
+    public Long getRatingUpdates() {
+        return ratingUpdates;
+    }
+
+    public void setRatingUpdates(Long ratingUpdates) {
+        this.ratingUpdates = ratingUpdates;
+    }
+
+    public List<User> getUsers() {
+        return users;
+    }
+
+    public void setUsers(List<User> users) {
+        this.users = users;
     }
 }

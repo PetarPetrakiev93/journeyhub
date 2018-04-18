@@ -38,7 +38,12 @@ public class LocationServiceImpl implements LocationService {
     }
 
     @Override
-    public LocationBindingModel getLocationByName(String name) {
+    public LocationBindingModel getLocationBindingByName(String name) {
         return this.modelMapper.map(this.locationRepository.getByName(name), LocationBindingModel.class);
+    }
+
+    @Override
+    public Location getLocationByName(String name) {
+        return this.locationRepository.getByName(name);
     }
 }

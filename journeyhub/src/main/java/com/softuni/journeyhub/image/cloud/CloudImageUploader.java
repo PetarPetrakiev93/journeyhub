@@ -1,5 +1,6 @@
 package com.softuni.journeyhub.image.cloud;
 
+import okhttp3.Response;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -7,7 +8,7 @@ import java.io.IOException;
 
 @Component
 public class CloudImageUploader {
-    private static final String PICTURE_FOLDER_ID = "1614584807";
+    private static final String PICTURE_FOLDER_ID = "1662147227";
 
     private static final String QUERY_PATH_SEPARATOR = "?";
 
@@ -31,8 +32,9 @@ public class CloudImageUploader {
         this.cloudAuthorizationService = cloudAuthorizationService;
     }
 
-    public void uploadFile(MultipartFile file) throws IOException {
-        this.httpRequestExecutor.executePostRequest(
+    public Response uploadFile(MultipartFile file) throws IOException {
+        this.cloudAuthorizationService.login();
+        return this.httpRequestExecutor.executePostRequest(
                 (UPLOAD_FILE_URL
                         + QUERY_PATH_SEPARATOR
                         + FOLDER_ID_PARAMETER

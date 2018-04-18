@@ -16,6 +16,8 @@ public class Image {
 
     private String url;
 
+    private String cloudId;
+
     @ManyToOne
     @JoinColumn(name = "event_id", referencedColumnName = "id")
     private Event event;
@@ -27,9 +29,10 @@ public class Image {
     public Image() {
     }
 
-    public Image(String name, String url) {
+    public Image(String name, String url, String cloudId) {
         this.setName(name);
         this.setUrl(url);
+        this.setCloudId(cloudId);
     }
 
     public Long getId() {
@@ -70,5 +73,13 @@ public class Image {
 
     public void setPlace(Place place) {
         this.place = place;
+    }
+
+    public String getCloudId() {
+        return cloudId;
+    }
+
+    public void setCloudId(String cloudId) {
+        this.cloudId = cloudId;
     }
 }

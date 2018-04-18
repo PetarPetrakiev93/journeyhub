@@ -1,9 +1,11 @@
 package com.softuni.journeyhub.locations.models;
 
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 public class LocationBindingModel {
     @NotNull
+    @Size(min = 2, message = "Name should be at least 2 symbols.")
     private String name;
 
     private Double longitude;

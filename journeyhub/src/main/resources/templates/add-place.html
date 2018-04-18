@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Location</title>
+    <div th:replace="fragments/CDN :: bootstrap"></div>
+    <div th:replace="fragments/CDN :: jquery"></div>
+    <div th:replace="fragments/CDN :: bootstrapjs"></div>
+    <div th:replace="fragments/CDN :: style"></div>
+</head>
+
+<body>
+<div class="container-fluid">
+    <div th:replace="fragments/head :: header"></div>
+</div>
+<div class="legend text-center" style="margin-top: 70px">
+</div>
+<hr class="my-2">
+<div class="container-fluid">
+    <div class="container mt-4">
+        <div class="form-holder">
+            <h1>Add Place</h1>
+            <form class="mt-4" th:action="@{/place/add}" th:method="post" th:object="${placeAddBindingModel}" enctype="multipart/form-data">
+                <fieldset>
+                    <div class="form-group" th:classappend="${#fields.hasErrors('name')}? 'is-invalid':''">
+                        <label for="name">Name</label>
+                        <input type="text" class="form-control" id="name" th:field="*{name}"
+                               th:classappend="${#fields.hasErrors('name')}? 'is-invalid':''"/>
+                        <div class="invalid-feedback" th:each="error : ${#fields.errors('name')}" th:text="${error}">
+                            Error Message
+                        </div>
+                    </div>
+                    <div class="form-group" th:classappend="${#fields.hasErrors('text')}? 'is-invalid':''">
+                        <label for="text">Text</label>
+                        <textarea rows="3" style="resize: none" class="form-control" id="text" th:field="*{text}"
+                                  th:classappend="${#fields.hasErrors('text')}? 'is-invalid':''">
+                        </textarea>
+                        <div class="invalid-feedback" th:each="error : ${#fields.errors('text')}" th:text="${error}">
+                            Error Message
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label" for="location">Locations:</label>
+                        <select class="form-control" id="location" th:field="*{location}"
+                                th:styleappend="${#fields.hasErrors('location')}? 'color: red':''">
+                            <option th:each="l : ${locations}"
+                                    th:value="${l}"
+                                    th:text="${l}">location name
+                            </option>
+                        </select>
+                        <small  style="color: red"
+                                th:each="error : ${#fields.errors('location')}" th:text="${error}">
+                            Error Message
+                        </small>
+                    </div>
+                    <div class="form-group">
+                        <label for="images">Add Images</label>
+                        <input type="file" id="images" multiple="multiple" th:field="*{images}"/>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </fieldset>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>

@@ -25,6 +25,8 @@ public class Place {
 
     private Double rating;
 
+    private Long ratingUpdates;
+
     @OneToMany(mappedBy = "place", targetEntity = Image.class, cascade = CascadeType.ALL)
     private List<Image> images;
 
@@ -36,6 +38,8 @@ public class Place {
 
 
     public Place() {
+        this.rating = 0.0D;
+        this.ratingUpdates = 0L;
     }
 
     public Long getId() {
@@ -92,5 +96,21 @@ public class Place {
 
     public void setText(String text) {
         this.text = text;
+    }
+
+    public Long getRatingUpdates() {
+        return ratingUpdates;
+    }
+
+    public void setRatingUpdates(Long ratingUpdates) {
+        this.ratingUpdates = ratingUpdates;
+    }
+
+    public List<User> getUsers() {
+        return users;
+    }
+
+    public void setUsers(List<User> users) {
+        this.users = users;
     }
 }

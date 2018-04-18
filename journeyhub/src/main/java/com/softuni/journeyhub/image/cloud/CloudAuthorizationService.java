@@ -10,9 +10,9 @@ import java.io.IOException;
 
 @Component
 public class CloudAuthorizationService {
-    private static final String LOGIN_USERNAME = "intercide@abv.bg";
+    private static final String LOGIN_USERNAME = "red_ferrari@mail.bg";
 
-    private static final String LOGIN_PASSWORD = "parola_test";
+    private static final String LOGIN_PASSWORD = "test123";
 
     private static final String LOGIN_URL =
             "https://api.pcloud.com/userinfo?getauth=1&logout=1&username="

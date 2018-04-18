@@ -1,5 +1,6 @@
 package com.softuni.journeyhub.locations.services;
 
+import com.softuni.journeyhub.locations.entities.Location;
 import com.softuni.journeyhub.locations.models.LocationBindingModel;
 
 import java.util.List;
@@ -9,5 +10,7 @@ public interface LocationService {
 
     List<LocationBindingModel> getAllLocations();
 
-    LocationBindingModel getLocationByName(String name);
+    LocationBindingModel getLocationBindingByName(String name);
+
+    Location getLocationByName(String name);
 }

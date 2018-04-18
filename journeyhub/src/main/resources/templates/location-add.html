@@ -15,14 +15,13 @@
     <div th:replace="fragments/head :: header"></div>
 </div>
 <div class="legend text-center" style="margin-top: 70px">
-    <h2>Login</h2>
+    <h2>Add Location</h2>
 </div>
 <hr class="my-2">
 <div class="container-fluid">
-    <div class="row justify-content-center">
-        <div class="form-holder text-center">
-            <h1>Add Location</h1>
-            <form class="form-inline" th:action="@{/location/add}" th:method="post" th:object="${locationBindingModel}">
+    <div class="container mt-4">
+        <div class="form-holder">
+            <form class="mt-4" th:action="@{/location/add}" th:method="post" th:object="${locationBindingModel}">
                 <fieldset>
                     <div class="form-group" th:classappend="${#fields.hasErrors('name')}? 'is-invalid':''">
                         <label for="name">Name</label>
