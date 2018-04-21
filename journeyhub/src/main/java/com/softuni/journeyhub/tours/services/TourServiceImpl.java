@@ -8,6 +8,7 @@ import com.softuni.journeyhub.tours.entities.Tour;
 import com.softuni.journeyhub.tours.exception.TourNotFoundException;
 import com.softuni.journeyhub.tours.models.PlaceBuildModel;
 import com.softuni.journeyhub.tours.models.TourAddModel;
+import com.softuni.journeyhub.tours.models.TourBindingModel;
 import com.softuni.journeyhub.tours.repositories.TourRepository;
 import com.softuni.journeyhub.users.services.UserService;
 import org.modelmapper.Converter;
@@ -15,6 +16,7 @@ import org.modelmapper.ModelMapper;
 import org.modelmapper.TypeMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.util.HtmlUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -69,7 +71,7 @@ public class TourServiceImpl implements TourService {
     public void addTour(TourAddModel model, String username) {
         Tour tour = new Tour();
         tour.setUser(this.userService.getUserByUsername(username));
-        tour.setName(model.getName());
+        tour.setName(HtmlUtils.htmlEscape(model.getName()));
         tour.setPlaces(new ArrayList<>());
         for (Long placeId : model.getPlaces()) {
             tour.getPlaces().add(this.placeService.getPlaceById(placeId));
@@ -88,13 +90,36 @@ public class TourServiceImpl implements TourService {
     }
 
     @Override
-    public Tour getTourById(Long id) {
+    public TourBindingModel getTourById(Long id) {
         Tour tour = this.tourRepository.getOne(id);
         try{
             Long test = tour.getId();
         }catch (Exception e){
             throw new TourNotFoundException();
         }
-        return tour;
+        TourBindingModel tourBindingModel = new TourBindingModel();
+        this.modelMapper.map(tour, tourBindingModel);
+        return tourBindingModel;
+    }
+
+    @Override
+    public void updateSuggestedTours() {
+        List<Tour> allTours = this.tourRepository.findAll();
+        allTours.forEach(t -> {
+            t.setSuggested(false);
+            tourRepository.save(t);
+        });
+        List<Place> topPlaces = this.placeService.getTopRated();
+
+        for (Place topPlace : topPlaces) {
+            for (Tour tour : allTours) {
+                for(Place place : tour.getPlaces()){
+                    if(place.getId().equals(topPlace.getId())){
+                        tour.setSuggested(true);
+                        tourRepository.save(tour);
+                    }
+                }
+            }
+        }
     }
 }

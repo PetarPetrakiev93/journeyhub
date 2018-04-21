@@ -13,6 +13,6 @@ public interface UserService {
     User getUserById(Long id);
     List<UserViewBindingModel> getAllUsers();
     UserEditBindingModel getUserEditById(Long id);
-    void updateUser(UserEditBindingModel user, Long id);
+    void updateUser(UserEditBindingModel user, Long id, Boolean moderator);
     void update(User user);
 }

@@ -47,21 +47,23 @@
             <div th:unless="${place.liked}">
                 <a th:href="@{/places/like/{id}(id=${place.id})}" class="btn btn-warning">&#128077;</a>
             </div>
-            <a th:href="@{/places/edit/{id}(id=${place.id})}" class="btn btn-primary">Edit</a>
-            <a th:href="@{/places/delete/{id}(id=${place.id})}" class="btn btn-danger">Delete</a>
+            <div sec:authorize="hasAnyRole('MODERATOR', 'ADMIN')">
+                <a th:href="@{/places/edit/{id}(id=${place.id})}" class="btn btn-primary">Edit</a>
+                <a th:href="@{/places/delete/{id}(id=${place.id})}" class="btn btn-danger">Delete</a>
+            </div>
         </div>
         <div class="container">
             <div class="row">
-            <div class="w3-content w3-display-container col-sm"
-                 style="width: 450px; margin-top: 35px; float:left; margin-left: 75px"
-                 th:if="${place.images.size()} > 0">
-                <div th:each="image : ${place.images}">
-                    <img class="mySlides" th:src="${image}" style="width:100%;">
+                <div class="w3-content w3-display-container col-sm"
+                     style="width: 450px; margin-top: 35px; float:left; margin-left: 75px"
+                     th:if="${place.images.size()} > 0">
+                    <div th:each="image : ${place.images}">
+                        <img class="mySlides" th:src="${image}" style="width:100%;">
+                    </div>
+                    <button class="w3-button w3-black w3-display-left" onclick="plusDivs(-1)">&#10094;</button>
+                    <button class="w3-button w3-black w3-display-right" onclick="plusDivs(1)">&#10095;</button>
                 </div>
-                <button class="w3-button w3-black w3-display-left" onclick="plusDivs(-1)">&#10094;</button>
-                <button class="w3-button w3-black w3-display-right" onclick="plusDivs(1)">&#10095;</button>
-            </div>
-            <div id="map" class="col-sm" style="float:right; margin-left: 50px; margin-right: 75px"></div>
+                <div id="map" class="col-sm" style="float:right; margin-left: 50px; margin-right: 75px"></div>
             </div>
         </div>
     </div>

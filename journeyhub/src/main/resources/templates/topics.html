@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>All Topics</title>
+    <div th:replace="fragments/CDN :: bootstrap"></div>
+    <div th:replace="fragments/CDN :: jquery"></div>
+    <div th:replace="fragments/CDN :: bootstrapjs"></div>
+    <div th:replace="fragments/CDN :: style"></div>
+</head>
+
+<body>
+<div class="container-fluid">
+    <div th:replace="fragments/head :: header"></div>
+</div>
+<div>
+    <div class="container-fluid" style="margin-top:70px">
+        <h2>Welcome to our Forum</h2>
+        <h6>Post everything that concerns you!</h6>
+        <button class="btn btn-default"><a th:href="@{/forum/add}">Add Topic</a>
+        </button>
+        <table class="table table-hover">
+            <tr>
+                <th>#</th>
+                <th>Name</th>
+                <th>Date</th>
+                <th>Creator</th>
+                <th></th>
+            </tr>
+            <tr th:each="topic,index : ${topics}" th:object="${topic}">
+                <td th:text="${index.count}"></td>
+                <td th:text="*{name}"></td>
+                <td th:text="*{date}"></td>
+                <td th:text="*{creator}"></td>
+                <td>
+                    <button class="btn btn-default"><a th:href="@{/forum/{id}(id=${topic.id})}">View</a>
+                    </button>
+                    <button class="btn btn-danger"><a th:href="@{/forum/topic/delete/{id}(id=${topic.id})}">Delete</a>
+                    </button>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+<div class="container-fluid">
+    <div th:replace="fragments/footer :: footer"></div>
+</div>
+</body>
+</html>

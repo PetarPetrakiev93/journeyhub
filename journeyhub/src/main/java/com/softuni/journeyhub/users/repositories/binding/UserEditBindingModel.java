@@ -5,6 +5,7 @@ public class UserEditBindingModel {
     private String username;
     private String email;
     private String password;
+    private boolean moderator;
 
     public UserEditBindingModel() {
     }
@@ -39,5 +40,13 @@ public class UserEditBindingModel {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public boolean getModerator() {
+        return moderator;
+    }
+
+    public void setModerator(boolean moderator) {
+        this.moderator = moderator;
     }
 }

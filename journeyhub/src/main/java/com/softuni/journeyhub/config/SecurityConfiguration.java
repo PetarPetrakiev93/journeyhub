@@ -22,7 +22,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 http
                 .authorizeRequests()
                 .antMatchers("/", "/login", "/register", "/api/**").permitAll()
-
+                        .antMatchers("/locations", "/location/add").hasAnyRole("MODERATOR", "ADMIN")
+                        .antMatchers("/place/add", "/places/edit/**", "/places/delete/**").hasAnyRole("MODERATOR", "ADMIN")
+                        .antMatchers("/users/**").hasRole("ADMIN")
                 .anyRequest().authenticated()
                 .and()
                 .csrf().disable()

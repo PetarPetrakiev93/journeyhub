@@ -3,6 +3,7 @@ package com.softuni.journeyhub.tours.services;
 import com.softuni.journeyhub.tours.entities.Tour;
 import com.softuni.journeyhub.tours.models.PlaceBuildModel;
 import com.softuni.journeyhub.tours.models.TourAddModel;
+import com.softuni.journeyhub.tours.models.TourBindingModel;
 
 import java.util.List;
 
@@ -13,5 +14,6 @@ public interface TourService {
     void addTour(TourAddModel model, String username);
     List<Tour> getMineTours(String username);
     List<Tour> getSuggested();
-    Tour getTourById(Long id);
+    TourBindingModel getTourById(Long id);
+    void updateSuggestedTours();
 }

@@ -33,29 +33,33 @@
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <a class="dropdown-item" href="/places/show">All Places</a>
-                        <!--<div sec:authorize="hasAnyRole('MODERATOR', 'ADMIN')">-->
+                        <div sec:authorize="hasAnyRole('MODERATOR', 'ADMIN')">
                         <a class="dropdown-item" href="/place/add">Add Place</a>
-                        <!--</div>-->
+                        </div>
                     </div>
                 </div>
             </li>
-            <!--<div sec:authorize="hasAnyRole('MODERATOR', 'ADMIN')">-->
-            <li class="nav-item dropdown">
-                <div class="dropdown-show">
-                    <a class="nav-link dropdown-toggle nav-link-white" href="/" id="navbarDropdown"
-                       data-toggle="dropdown">
-                        Locations
-                    </a>
-                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="/locations">All Locations</a>
-                        <a class="dropdown-item" href="/location/add">Add Location</a>
+            <div sec:authorize="hasAnyRole('MODERATOR', 'ADMIN')">
+                <li class="nav-item dropdown">
+                    <div class="dropdown-show">
+                        <a class="nav-link dropdown-toggle nav-link-white" href="/" id="navbarDropdown"
+                           data-toggle="dropdown">
+                            Locations
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="/locations">All Locations</a>
+                            <a class="dropdown-item" href="/location/add">Add Location</a>
+                        </div>
                     </div>
-                </div>
-            </li>
-            <!--</div>-->
-            <!--<li class="nav-item" sec:authorize="hasRole('ADMIN')">-->
+                </li>
+            </div>
+            <li class="nav-item" sec:authorize="hasRole('ADMIN')">
             <a class="nav-link nav-link-white" href="/users">Users</a>
-            <!--</li>-->
+            </li>
+            <a class="nav-link nav-link-white" href="/forum">Forum</a>
+            <li class="nav-item" sec:authorize="hasAnyRole('ADMIN', 'MODERATOR')">
+            <a class="nav-link nav-link-white" href="/forum/ordered">Ordered Forum</a>
+            </li>
         </ul>
         <div>
             <div sec:authorize="isAnonymous()">

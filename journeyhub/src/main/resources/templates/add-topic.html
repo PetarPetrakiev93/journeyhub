@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Location</title>
+    <div th:replace="fragments/CDN :: bootstrap"></div>
+    <div th:replace="fragments/CDN :: jquery"></div>
+    <div th:replace="fragments/CDN :: bootstrapjs"></div>
+    <div th:replace="fragments/CDN :: style"></div>
+</head>
+
+<body>
+<div class="container-fluid">
+    <div th:replace="fragments/head :: header"></div>
+</div>
+<div class="legend text-center" style="margin-top: 70px">
+</div>
+<hr class="my-2">
+<div class="container-fluid">
+    <div class="container mt-4">
+        <div class="form-holder">
+            <h1>Add Topic</h1>
+            <form class="mt-4" th:action="@{/forum/topic/add}" th:method="post" th:object="${addTopic}">
+                <div class="form-group" th:classappend="${#fields.hasErrors('name')}? 'is-invalid':''">
+                    <label for="name">Title</label>
+                    <input type="text" class="form-control" id="name" th:field="*{name}"
+                           th:classappend="${#fields.hasErrors('name')}? 'is-invalid':''"/>
+                    <div class="invalid-feedback" th:each="error : ${#fields.errors('name')}" th:text="${error}">
+                        Error Message
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+        </div>
+    </div>
+</div>
+<div class="container-fluid">
+    <div th:replace="fragments/footer :: footer"></div>
+</div>
+</body>
+</html>

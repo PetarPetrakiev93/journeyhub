@@ -1,6 +1,5 @@
 package com.softuni.journeyhub.forum.entities;
 
-
 import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
@@ -18,13 +17,15 @@ public class Topic {
 
     private Date date;
 
-    private Long creator;
+    private String creator;
 
     @OneToMany(mappedBy = "topic", targetEntity = Post.class, fetch = FetchType.EAGER,
             cascade = CascadeType.ALL)
     private List<Post> posts;
 
     public Topic() {
+        this.views = 0L;
+        this.date = new Date();
     }
 
     public Long getId() {
@@ -59,11 +60,11 @@ public class Topic {
         this.date = date;
     }
 
-    public Long getCreator() {
+    public String getCreator() {
         return creator;
     }
 
-    public void setCreator(Long creator) {
+    public void setCreator(String creator) {
         this.creator = creator;
     }
 

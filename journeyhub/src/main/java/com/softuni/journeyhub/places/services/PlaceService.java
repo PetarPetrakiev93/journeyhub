@@ -24,4 +24,5 @@ public interface PlaceService {
     List<Place> getLikedPlacesByUser(String username);
     List<Place> getNotLikedPlacesByUser(String username);
     List<Place> getPlaceByLocation(String location);
+    List<Place> getTopRated();
 }

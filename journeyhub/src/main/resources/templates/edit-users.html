@@ -25,6 +25,13 @@
             <label for="email">Email</label>
             <input type="text" class="form-control" id="email" th:field="*{email}"/>
         </div>
+        <div class="form-check">
+            <label class="form-check-label" for="makeModerator">
+                <input type="checkbox" class="form-check-input" id="makeModerator" name="makeModerator"
+                       th:checked="${user.getModerator()}">
+                Make Moderator
+            </label>
+        </div>
         <button type="submit" class="btn btn-danger">Edit</button>
     </form>
 </div>

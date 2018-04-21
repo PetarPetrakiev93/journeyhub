@@ -207,4 +207,9 @@ public class PlaceServiceImpl implements PlaceService {
         return allPlaces.stream().filter(p -> p.getLocation().equals(location)).collect(Collectors.toList());
     }
 
+    @Override
+    public List<Place> getTopRated() {
+        return this.placeRepository.findAllByOrderByRatingDesc().subList(0,3);
+    }
+
 }

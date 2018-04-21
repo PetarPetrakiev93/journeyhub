@@ -10,6 +10,7 @@ import com.softuni.journeyhub.users.repositories.binding.UserEditBindingModel;
 import com.softuni.journeyhub.users.repositories.binding.UserViewBindingModel;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -77,17 +78,37 @@ public class UserServiceImpl implements UserService, UserDetailsService {
             throw new UserNotFoundException();
         }
         UserEditBindingModel userEditBindingModel = this.modelMapper.map(user,UserEditBindingModel.class);
+        boolean isModerator = false;
+        for (GrantedAuthority authority : user.getAuthorities()) {
+            if(authority.getAuthority().equals("ROLE_MODERATOR")){
+                isModerator = true;
+            }
+        }
+        userEditBindingModel.setModerator(isModerator);
         return userEditBindingModel;
     }
 
     @Override
-    public void updateUser(UserEditBindingModel bindingModel, Long id) {
+    public void updateUser(UserEditBindingModel bindingModel, Long id, Boolean moderator) {
         User user = this.userRepository.getById(id);
         if(user == null){
             throw new UserNotFoundException();
         }
         user.setUsername(bindingModel.getUsername());
         user.setEmail(bindingModel.getEmail());
+        if(moderator){
+            Role authority = this.roleRepository.findByAuthority("ROLE_USER");
+            HashSet<Role> roles = new HashSet<>();
+            roles.add(authority);
+            authority = this.roleRepository.findByAuthority("ROLE_MODERATOR");
+            roles.add(authority);
+            user.setAuthorities(roles);
+        }else{
+            Role authority = this.roleRepository.findByAuthority("ROLE_USER");
+            HashSet<Role> roles = new HashSet<>();
+            roles.add(authority);
+            user.setAuthorities(roles);
+        }
         this.userRepository.save(user);
     }
 

@@ -76,9 +76,14 @@ public class UserController extends BaseController {
 
     @PostMapping("/users/edit/{id}")
     private ModelAndView editUserPost(@ModelAttribute UserEditBindingModel userEditBindingModel,
+                                      @RequestParam(value = "makeModerator", required = false)Boolean makeModerator,
                                    @PathVariable Long id,
                                    ModelAndView modelAndView){
-        this.userService.updateUser(userEditBindingModel, id);
+        if(makeModerator == null){
+            this.userService.updateUser(userEditBindingModel, id,false);
+        }else {
+            this.userService.updateUser(userEditBindingModel, id,true);
+        }
         return this.redirect("/users");
     }
 }

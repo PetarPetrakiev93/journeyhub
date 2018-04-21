@@ -4,7 +4,7 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Entity
-@Table(name = "topics")
+@Table(name = "post")
 public class Post {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -12,15 +12,16 @@ public class Post {
 
     private String text;
 
-    private Long author;
+    private String author;
 
     private Date date;
 
     @ManyToOne
-    @JoinColumn(name = "post_id", referencedColumnName = "id")
+    @JoinColumn(name = "topic_id", referencedColumnName = "id")
     private Topic topic;
 
     public Post() {
+        this.date = new Date();
     }
 
     public Long getId() {
@@ -39,11 +40,11 @@ public class Post {
         this.text = text;
     }
 
-    public Long getAuthor() {
+    public String getAuthor() {
         return author;
     }
 
-    public void setAuthor(Long author) {
+    public void setAuthor(String author) {
         this.author = author;
     }
 
@@ -53,5 +54,13 @@ public class Post {
 
     public void setDate(Date date) {
         this.date = date;
+    }
+
+    public Topic getTopic() {
+        return topic;
+    }
+
+    public void setTopic(Topic topic) {
+        this.topic = topic;
     }
 }
