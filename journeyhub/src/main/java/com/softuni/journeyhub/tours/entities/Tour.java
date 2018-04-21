@@ -1,6 +1,7 @@
 package com.softuni.journeyhub.tours.entities;
 
 import com.softuni.journeyhub.places.entities.Place;
+import com.softuni.journeyhub.users.entities.User;
 
 import javax.persistence.*;
 import java.util.List;
@@ -20,13 +21,14 @@ public class Tour {
             inverseJoinColumns = @JoinColumn(name = "place_id", referencedColumnName = "id"))
     private List<Place> places;
 
-    private Double rating;
-
     private Boolean suggested;
 
-    private Long creator;
+    @ManyToOne
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
+    private User user;
 
     public Tour() {
+        suggested = false;
     }
 
     public Long getId() {
@@ -53,19 +55,19 @@ public class Tour {
         this.places = places;
     }
 
-    public Double getRating() {
-        return rating;
-    }
-
-    public void setRating(Double rating) {
-        this.rating = rating;
-    }
-
     public Boolean getSuggested() {
         return suggested;
     }
 
     public void setSuggested(Boolean suggested) {
         this.suggested = suggested;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }

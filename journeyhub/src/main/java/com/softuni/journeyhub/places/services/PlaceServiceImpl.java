@@ -183,4 +183,28 @@ public class PlaceServiceImpl implements PlaceService {
         return ratingModel;
     }
 
+    @Override
+    public List<Place> getLikedPlacesByUser(String username) {
+        User user = this.userService.getUserByUsername(username);
+        List<Place> allPlaces = this.placeRepository.findAll();
+
+        return allPlaces.stream().filter(p -> p.getUsers().contains(user)).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<Place> getNotLikedPlacesByUser(String username) {
+        User user = this.userService.getUserByUsername(username);
+        List<Place> allPlaces = this.placeRepository.findAll();
+
+        return allPlaces.stream().filter(p -> !p.getUsers().contains(user)).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<Place> getPlaceByLocation(String locationName) {
+        Location location = this.locationService.getLocationByName(locationName);
+        List<Place> allPlaces = this.placeRepository.findAll();
+
+        return allPlaces.stream().filter(p -> p.getLocation().equals(location)).collect(Collectors.toList());
+    }
+
 }

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Tours</title>
+    <div th:replace="fragments/CDN :: bootstrap"></div>
+    <div th:replace="fragments/CDN :: jquery"></div>
+    <div th:replace="fragments/CDN :: bootstrapjs"></div>
+    <div th:replace="fragments/CDN :: style"></div>
+</head>
+
+<body>
+<div class="container-fluid">
+    <div th:replace="fragments/head :: header"></div>
+</div>
+<div>
+    <div class="container-fluid" style="margin-top:70px">
+        <h3 th:value="${view}"></h3>
+        <div th:if="${#lists.size(tours)} == 0">
+            <h2>There are no tours here yet!</h2>
+        </div>
+        <div th:unless="${#lists.size(tours)} == 0"><table class="table table-hover">
+            <tr>
+                <th>#</th>
+                <th>Name</th>
+                <th></th>
+            </tr>
+            <tr th:each="tour,index : ${tours}" th:object="${tour}">
+                <td th:text="${index.count}"></td>
+                <td th:text="*{name}"></td>
+                <td>
+                    <button class="btn btn-default"><a th:href="@{/tours/{id}(id=${tour.id})}">View</a>
+                    </button>
+                </td>
+            </tr>
+        </table>
+        </div>
+    </div>
+</div>
+<div class="container-fluid">
+    <div th:replace="fragments/footer :: footer"></div>
+</div>
+</body>
+</html>

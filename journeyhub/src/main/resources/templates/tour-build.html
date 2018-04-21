@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Build Tour</title>
+    <div th:replace="fragments/CDN :: bootstrap"></div>
+    <div th:replace="fragments/CDN :: jquery"></div>
+    <div th:replace="fragments/CDN :: bootstrapjs"></div>
+    <div th:replace="fragments/CDN :: style"></div>
+</head>
+
+<body>
+<div class="container-fluid">
+    <div th:replace="fragments/head :: header"></div>
+</div>
+<div class="legend text-center" style="margin-top: 70px">
+    <h1>Build your tour</h1>
+</div>
+<hr class="my-2">
+<div class="container-fluid">
+    <div class="form-holder row">
+        <div class="col-sm" style="margin-left: 50px;">
+            <form method="get" class="form-vertical" style="float: left;">
+                <input type="text" name="location" placeholder="Location..">
+                <input class="btn btn-primary" type="submit" value="Search By Location">
+            </form>
+            <select class="form-control" id="otherPlaces" multiple="multiple">
+                <option th:each="place : ${otherPlaces}"
+                        th:value="${place.id}"
+                        th:text="${place.name} + ' ' + ${place.location}">Place name
+                </option>
+            </select>
+        </div>
+        <div class="col-sm" style="margin-left: 50px; margin-top: 15px">Liked Places
+            <select class="form-control" id="likedPlaces" multiple="multiple">
+                <option th:each="place : ${likedPlaces}"
+                        th:value="${place.id}"
+                        th:text="${place.name} + ' ' + ${place.location}">Place name
+                </option>
+            </select>
+        </div>
+    </div>
+    <div class="text-center" style="margin-top: 30px">
+        <button class="btn btn-basic add-selected" onclick="addElements()">Add Selected</button>
+    </div>
+    <form th:action="@{/tour/add}" th:method="post" th:object="${tourAddBinding}">
+        <div class="form-group" th:classappend="${#fields.hasErrors('name')}? 'is-invalid':''">
+            <label for="name">Name</label>
+            <input type="text" class="form-control" id="name" th:field="*{name}"/>
+            <small style="color: red"
+                   th:each="error : ${#fields.errors('name')}" th:text="${error}">
+                Error Message
+            </small>
+        </div>
+        <div class="text-center" style="margin-left: 50px; margin-top: 15px; margin-right: 50px">Selected Places
+            <select class="form-control" id="selected" multiple="multiple" th:field="*{places}">
+            </select>
+        </div>
+        <div class="text-center">
+            <h6>Please mark the places that are your final choice.</h6>
+            <button type="submit" class="btn btn-danger">Submit</button>
+        </div>
+    </form>
+</div>
+<div class="container-fluid">
+    <div th:replace="fragments/footer :: footer"></div>
+</div>
+<script src="/js/common/build-tour.js"></script>
+</body>
+</html>

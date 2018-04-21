@@ -1,37 +1,40 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <nav class="navbar navbar-expand-lg navbar-whine" th:fragment="header">
-    <a class="navbar-brand nav-link-white" href="/">Journey</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
+    <button class="navbar-toggler hidden-sm-up" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+            aria-label="Toggle navigation">
+        &#9776;
     </button>
-
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <a class="navbar-brand nav-link-white" href="/">JourneyHub</a>
         <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
                 <a class="nav-link nav-link-white" href="/">Home</a>
             </li>
             <li class="nav-item dropdown">
                 <div class="dropdown-show">
-                <a class="nav-link dropdown-toggle nav-link-white" href="/" id="navbarDropdown" data-toggle="dropdown">
-                    Tours
-                </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="/tours/build">Build Tour</a>
-                    <!--<div sec:authorize="hasAnyRole('MODERATOR', 'ADMIN')">-->
-                    <a class="dropdown-item" href="/tours/suggested">Suggested Tour</a>
-                    <!--</div>-->
-                </div>
+                    <a class="nav-link dropdown-toggle nav-link-white" href="/" id="navbarDropdown"
+                       data-toggle="dropdown">
+                        Tours
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="/tours/build">Build Tour</a>
+                        <!--<div sec:authorize="hasAnyRole('MODERATOR', 'ADMIN')">-->
+                        <a class="dropdown-item" href="/tours/suggested">Suggested Tour</a>
+                        <!--</div>-->
+                    </div>
                 </div>
             </li>
             <li class="nav-item dropdown">
                 <div class="dropdown-show">
-                    <a class="nav-link dropdown-toggle nav-link-white" href="/" id="navbarDropdown" data-toggle="dropdown">
+                    <a class="nav-link dropdown-toggle nav-link-white" href="/" id="navbarDropdown"
+                       data-toggle="dropdown">
                         Places
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <a class="dropdown-item" href="/places/show">All Places</a>
                         <!--<div sec:authorize="hasAnyRole('MODERATOR', 'ADMIN')">-->
-                            <a class="dropdown-item" href="/place/add">Add Place</a>
+                        <a class="dropdown-item" href="/place/add">Add Place</a>
                         <!--</div>-->
                     </div>
                 </div>
@@ -39,7 +42,8 @@
             <!--<div sec:authorize="hasAnyRole('MODERATOR', 'ADMIN')">-->
             <li class="nav-item dropdown">
                 <div class="dropdown-show">
-                    <a class="nav-link dropdown-toggle nav-link-white" href="/" id="navbarDropdown" data-toggle="dropdown">
+                    <a class="nav-link dropdown-toggle nav-link-white" href="/" id="navbarDropdown"
+                       data-toggle="dropdown">
                         Locations
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -50,7 +54,7 @@
             </li>
             <!--</div>-->
             <!--<li class="nav-item" sec:authorize="hasRole('ADMIN')">-->
-                <a class="nav-link nav-link-white" href="/users">Users</a>
+            <a class="nav-link nav-link-white" href="/users">Users</a>
             <!--</li>-->
         </ul>
         <div>
@@ -70,7 +74,7 @@
                         <a class="nav-link nav-link-white" href="/tours/mine">My Tours</a>
                     </li>
                     <li class="nav-item active">
-                       <span class="nav-link nav-link-white" sec:authentication="name">Welcome, name</span>
+                        <span class="nav-link nav-link-white" sec:authentication="name">Welcome, name</span>
                     </li>
                     <li class="nav-item active">
                         <a class="nav-link nav-link-white" th:href="@{/logout}">Logout</a>
@@ -78,5 +82,6 @@
                 </ul>
             </div>
         </div>
+
     </div>
 </nav>

@@ -21,4 +21,7 @@ public interface PlaceService {
     void delete(Long id);
     void likePlace(Long id, String username);
     RatingModel updateRaiting(Long id, RatingModel ratingModel);
+    List<Place> getLikedPlacesByUser(String username);
+    List<Place> getNotLikedPlacesByUser(String username);
+    List<Place> getPlaceByLocation(String location);
 }

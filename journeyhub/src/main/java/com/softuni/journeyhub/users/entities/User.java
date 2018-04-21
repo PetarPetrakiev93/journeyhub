@@ -1,6 +1,7 @@
 package com.softuni.journeyhub.users.entities;
 
 import com.softuni.journeyhub.places.entities.Place;
+import com.softuni.journeyhub.tours.entities.Tour;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -39,6 +40,9 @@ public class User implements UserDetails{
             joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "place_id", referencedColumnName = "id"))
     private List<Place> likedPlaces;
+
+    @OneToMany(mappedBy = "user", targetEntity = Tour.class, cascade = CascadeType.ALL)
+    private List<Tour> tours;
 
     public User() {
         this.setAccountNonExpired(true);
@@ -130,5 +134,13 @@ public class User implements UserDetails{
 
     public void setLikedPlaces(List<Place> likedPlaces) {
         this.likedPlaces = likedPlaces;
+    }
+
+    public List<Tour> getTours() {
+        return tours;
+    }
+
+    public void setTours(List<Tour> tours) {
+        this.tours = tours;
     }
 }
