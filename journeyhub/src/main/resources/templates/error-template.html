@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Journey Hub</title>
+    <title>JourneyHub</title>
     <div th:replace="fragments/CDN :: bootstrap"></div>
     <div th:replace="fragments/CDN :: jquery"></div>
     <div th:replace="fragments/CDN :: bootstrapjs"></div>
@@ -13,9 +13,7 @@
 <body>
 <div class="container-fluid">
     <div th:replace="fragments/head :: header"></div>
-</div>
-<div class="container-fluid">
-    <div th:replace="fragments/footer :: footer"></div>
+    <h2 class="has-danger" style="text-align: center" th:text="${error}"></h2>
 </div>
 </body>
 </html>

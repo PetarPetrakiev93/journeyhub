@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>All Places</title>
+    <div th:replace="fragments/CDN :: bootstrap"></div>
+    <div th:replace="fragments/CDN :: jquery"></div>
+    <div th:replace="fragments/CDN :: bootstrapjs"></div>
+    <div th:replace="fragments/CDN :: style"></div>
+
+</head>
+
+<body>
+<div class="container-fluid">
+    <div th:replace="fragments/head :: header"></div>
+</div>
+<div>
+    <div class="legend text-center">
+        <h2>All Places</h2>
+    </div>
+    <div class="container-fluid" style="margin-top:70px">
+        <div class="grid-container">
+            <div th:each="place,index : ${places}" th:object="${place}" class="justify-content-center">
+                <a th:href="@{/places/show/{id}(id=${place.id})}"><div class="grid-item justify-content-center" th:id="*{id}">
+                    <img src="/upload-empty.png" class="img-thumbnail">
+                    <h6 class="text-center" th:text="*{name}"></h6>
+                    <h6 class="text-center" th:text="*{text}"></h6>
+                    <h6 class="text-center" th:text="${place.location.name}"></h6>
+                </div></a>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid" style="margin-top: 25px">
+        <nav>
+            <ul class="pagination">
+                <li class="page-item"><a class="page-link" th:if="${places.hasPrevious()}"
+                                         th:href="@{/places/show(page=${places.previousPageable().getPageNumber() + 1})}">Previous</a>
+                </li>
+
+                <!--Dot Button-->
+                <li class="page-item"><a class="page-link" th:if="${places.getPageable().getPageNumber() + 1 > 2}"
+                                         th:disabled="true">...</a></li>
+
+                <!--Pagination Navigation-->
+                <th:block th:each="number : ${#numbers.sequence(
+            ((places.getPageable().getPageNumber()
+            / 2) * 2) + 1
+            , ((places.getPageable().getPageNumber()
+            / 2) * 2) + 2)}">
+                    <li class="page-item"
+                        th:classappend="${number == places.getPageable().getPageNumber() + 1 ? ' active' : ''}"><a
+                            class="page-link" th:text="${number}" th:href="@{/places/show(page=${number})}"></a></li>
+                </th:block>
+
+                <!--Dot Button-->
+                <li class="page-item"><a class="page-link"
+                                         th:if="${places.getPageable().getPageNumber() + 1 < places.getTotalPages() - 1}"
+                                         th:disabled="true">...</a></li>
+                <li class="page-item"><a class="page-link" th:if="${places.hasNext()}"
+                                         th:href="@{/places/show(page=${places.nextPageable().getPageNumber()+1})}">Next</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</div>
+</div>
+<div class="container-fluid">
+    <div th:replace="fragments/footer :: footer"></div>
+</div>
+<script src="/js/common/show-places.js"></script>
+
+</body>
+</html>

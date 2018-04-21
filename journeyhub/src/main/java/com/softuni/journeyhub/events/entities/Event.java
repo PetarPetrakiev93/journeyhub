@@ -1,6 +1,6 @@
 package com.softuni.journeyhub.events.entities;
 
-import com.softuni.journeyhub.image.models.Image;
+import com.softuni.journeyhub.image.entity.Image;
 import com.softuni.journeyhub.locations.entities.Location;
 import com.softuni.journeyhub.tours.entities.Tour;
 import com.softuni.journeyhub.users.entities.User;

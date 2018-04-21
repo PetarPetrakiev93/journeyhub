@@ -1,6 +1,6 @@
 package com.softuni.journeyhub.image.repositories;
 
-import com.softuni.journeyhub.image.models.Image;
+import com.softuni.journeyhub.image.entity.Image;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

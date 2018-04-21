@@ -1,0 +1,13 @@
+.star-rating {
+    line-height:32px;
+    font-size:1.25em;
+}
+
+.star-rating .fa-star{
+    font-size: 40px;
+    color: yellow;
+}
+
+.fa-star-o{
+    font-size: 40px;
+}

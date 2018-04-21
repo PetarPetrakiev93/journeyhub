@@ -2,7 +2,7 @@ package com.softuni.journeyhub.image.cloud;
 
 import okhttp3.*;
 import com.google.gson.Gson;
-import com.softuni.journeyhub.image.models.Image;
+import com.softuni.journeyhub.image.entity.Image;
 import org.springframework.stereotype.Component;
 
 import java.io.IOException;
@@ -43,49 +43,18 @@ public class CloudImageExtractor {
     public Image getImage(Response response) throws IOException {
         this.cloudAuthorizationService.login();
         Gson gson = new Gson();
-        String accessToken = this.cloudAuthorizationService.getAccessToken();
 
         String fileResult = response.body().string();
-
         Map<String, Object> file = gson.fromJson(fileResult, Map.class);
-
         ArrayList<Map<String, String>> fileData = (ArrayList<Map<String, String>>) file.get("metadata");
+        String fileId = fileData.get(0).get("id").toString().substring(1);
+        String fileName = fileData.get(0).get("name").toString();
 
-
-            String fileId = fileData.get(0).get("id").toString().substring(1);
-
-            String fileListJsonResult = this.httpRequestExecutor.executeGetRequest(
-                    LIST_FILE_URL
-                            + QUERY_PATH_SEPARATOR
-                            + FILE_ID_PARAMETER
-                            + fileId
-                            + QUERY_PARAMETER_SEPARATOR
-                            + AUTH_PARAMETER
-                            + accessToken
-            ).body()
-                    .string();
-
-            String fileCode = gson.fromJson(fileListJsonResult, Map.class).get("code").toString();
-
-            String fileDownloadJsonResult = this.httpRequestExecutor.executeGetRequest(
-                    DOWNLOAD_FILE_URL
-                            + QUERY_PATH_SEPARATOR
-                            + CODE_PARAMETER
-                            + fileCode
-            ).body()
-                    .string();
-
-            Map<String, Object> fileDownloadData = gson.fromJson(fileDownloadJsonResult, Map.class);
-
-            String filePath = fileDownloadData.get("path").toString();
-            String host = ((ArrayList<String>) fileDownloadData.get("hosts")).get(0);
-
-            String fileName = fileData.get(0).get("name").toString();
-            String fileUrl = "https://" + host + filePath;
-            return new Image(fileName, fileUrl, fileId);
+        return new Image(fileName, fileId);
     }
 
-    public Image updateImages(Image image) throws IOException {
+    public String getImageUrl(Image image) throws IOException {
+        //this.cloudAuthorizationService.login();
         Gson gson = new Gson();
         String accessToken = this.cloudAuthorizationService.getAccessToken();
 
@@ -116,9 +85,10 @@ public class CloudImageExtractor {
 
         String filePath = fileDownloadData.get("path").toString();
         String host = ((ArrayList<String>) fileDownloadData.get("hosts")).get(0);
-        String fileUrl = "https://" + host + filePath;
-        image.setUrl(fileUrl);
+        return "https://" + host + filePath;
+    }
+
+    public void updateToken() throws IOException {
         this.cloudAuthorizationService.login();
-        return image;
     }
 }

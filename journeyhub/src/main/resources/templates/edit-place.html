@@ -20,8 +20,8 @@
 <div class="container-fluid">
     <div class="container mt-4">
         <div class="form-holder">
-            <h1>Add Place</h1>
-            <form class="mt-4" th:action="@{/place/add}" th:method="post" th:object="${placeAddBindingModel}" enctype="multipart/form-data">
+            <h1>Edit Place</h1>
+            <form class="mt-4" th:action="@{/places/edit/{id}(id=${placeEdit.id})}" th:method="post" th:object="${placeEdit}" enctype="multipart/form-data">
                 <fieldset>
                     <div class="form-group" th:classappend="${#fields.hasErrors('name')}? 'is-invalid':''">
                         <label for="name">Name</label>

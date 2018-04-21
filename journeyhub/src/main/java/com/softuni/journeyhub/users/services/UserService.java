@@ -14,4 +14,5 @@ public interface UserService {
     List<UserViewBindingModel> getAllUsers();
     UserEditBindingModel getUserEditById(Long id);
     void updateUser(UserEditBindingModel user, Long id);
+    void update(User user);
 }
