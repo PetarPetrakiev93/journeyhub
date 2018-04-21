@@ -62,10 +62,13 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     }
 
     @Override
-    public List<UserViewBindingModel> getAllUsers() {
+    public List<UserViewBindingModel> getAllUsers(String username) {
         List<UserViewBindingModel> userViewBindingModels = new ArrayList<>();
         List<User> users = this.userRepository.findAll();
         for (User user : users) {
+            if(user.getUsername().equals(username)){
+                continue;
+            }
             userViewBindingModels.add(this.modelMapper.map(user, UserViewBindingModel.class));
         }
         return userViewBindingModels;

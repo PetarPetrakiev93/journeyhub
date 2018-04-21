@@ -11,7 +11,7 @@ public interface UserService {
     void register(RegisterBindingModel user);
     User getUserByUsername(String username);
     User getUserById(Long id);
-    List<UserViewBindingModel> getAllUsers();
+    List<UserViewBindingModel> getAllUsers(String username);
     UserEditBindingModel getUserEditById(Long id);
     void updateUser(UserEditBindingModel user, Long id, Boolean moderator);
     void update(User user);

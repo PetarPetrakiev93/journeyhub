@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import java.security.Principal;
 import java.util.List;
 
 @Controller
@@ -61,8 +62,8 @@ public class UserController extends BaseController {
     }
 
     @GetMapping("/users")
-    private ModelAndView showUsers(ModelAndView modelAndView){
-        List<UserViewBindingModel> users = this.userService.getAllUsers();
+    private ModelAndView showUsers(ModelAndView modelAndView, Principal principal){
+        List<UserViewBindingModel> users = this.userService.getAllUsers(principal.getName());
         return this.view("show-users", "users", users);
     }
 
