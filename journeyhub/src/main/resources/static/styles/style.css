@@ -18,7 +18,12 @@ img {
     object-fit: cover;
 }
 
-nav > {
+nav     {
     background: #b1dfbb;
-    color: #c69500;
+}
+
+#map {
+    width: 100%;
+    height: 400px;
+    background-color: grey;
 }

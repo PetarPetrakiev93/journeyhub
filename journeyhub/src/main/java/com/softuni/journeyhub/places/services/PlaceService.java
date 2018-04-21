@@ -4,6 +4,7 @@ import com.softuni.journeyhub.places.entities.Place;
 import com.softuni.journeyhub.places.models.PlaceAddBindingModel;
 import com.softuni.journeyhub.places.models.PlaceEditBindingModel;
 import com.softuni.journeyhub.places.models.PlaceShowBindingModel;
+import com.softuni.journeyhub.places.models.RatingModel;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -19,4 +20,5 @@ public interface PlaceService {
     void editPlace(PlaceEditBindingModel editBindingModel);
     void delete(Long id);
     void likePlace(Long id, String username);
+    RatingModel updateRaiting(Long id, RatingModel ratingModel);
 }

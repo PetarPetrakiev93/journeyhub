@@ -1,6 +1,6 @@
 package com.softuni.journeyhub.image.services;
 
-import com.softuni.journeyhub.events.entities.Event;
+
 import com.softuni.journeyhub.image.cloud.CloudImageExtractor;
 import com.softuni.journeyhub.image.cloud.CloudImageUploader;
 import com.softuni.journeyhub.image.entity.Image;
@@ -48,14 +48,6 @@ public class ImageServiceImpl implements ImageService {
         Image image = this.extractor.getImage(
                 this.uploader.uploadFile(file));
         image.setPlace(place);
-        return this.imageRepository.save(image);
-    }
-
-    @Override
-    public Image uploadEventImage(MultipartFile file, Event event) throws IOException {
-        Image image = this.extractor.getImage(
-                this.uploader.uploadFile(file));
-        image.setEvent(event);
         return this.imageRepository.save(image);
     }
 

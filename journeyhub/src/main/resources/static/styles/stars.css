@@ -5,9 +5,14 @@
 
 .star-rating .fa-star{
     font-size: 40px;
-    color: yellow;
+    color:#FF912C;
 }
 
 .fa-star-o{
+    font-size: 40px;
+}
+
+.fa-star-o.hover{
+    color:#FFCC36;
     font-size: 40px;
 }

@@ -2,6 +2,7 @@ package com.softuni.journeyhub.locations.services;
 
 import com.softuni.journeyhub.locations.entities.Location;
 import com.softuni.journeyhub.locations.models.LocationBindingModel;
+import com.softuni.journeyhub.locations.models.LocationRestModel;
 import com.softuni.journeyhub.locations.repositories.LocationRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,5 +46,12 @@ public class LocationServiceImpl implements LocationService {
     @Override
     public Location getLocationByName(String name) {
         return this.locationRepository.getByName(name);
+    }
+
+    @Override
+    public LocationRestModel getRestLocation(String name) {
+        LocationRestModel model = new LocationRestModel();
+        this.modelMapper.map(this.locationRepository.getByName(name), model);
+        return model;
     }
 }

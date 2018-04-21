@@ -1,6 +1,5 @@
 package com.softuni.journeyhub.image.entity;
 
-import com.softuni.journeyhub.events.entities.Event;
 import com.softuni.journeyhub.places.entities.Place;
 
 import javax.persistence.*;
@@ -15,10 +14,6 @@ public class Image {
     private String name;
 
     private String cloudId;
-
-    @ManyToOne
-    @JoinColumn(name = "event_id", referencedColumnName = "id")
-    private Event event;
 
     @ManyToOne
     @JoinColumn(name = "place_id", referencedColumnName = "id")
@@ -46,14 +41,6 @@ public class Image {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public Event getEvent() {
-        return event;
-    }
-
-    public void setEvent(Event event) {
-        this.event = event;
     }
 
     public Place getPlace() {

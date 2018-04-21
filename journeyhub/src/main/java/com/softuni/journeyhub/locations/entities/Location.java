@@ -1,6 +1,5 @@
 package com.softuni.journeyhub.locations.entities;
 
-import com.softuni.journeyhub.events.entities.Event;
 import com.softuni.journeyhub.places.entities.Place;
 
 import javax.persistence.*;
@@ -20,21 +19,10 @@ public class Location {
 
     private Double latitude;
 
-    @OneToMany(mappedBy = "location", targetEntity = Event.class, cascade = CascadeType.ALL)
-    private List<Event> events;
-
     @OneToMany(mappedBy = "location", targetEntity = Place.class, cascade = CascadeType.ALL)
     private List<Place> places;
 
     public Location() {
-    }
-
-    public List<Event> getEvents() {
-        return events;
-    }
-
-    public void setEvents(List<Event> events) {
-        this.events = events;
     }
 
     public Long getId() {

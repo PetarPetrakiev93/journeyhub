@@ -14,6 +14,8 @@ public class PlaceShowBindingModel {
 
     private List<String> images;
 
+    private Double rating;
+
     private boolean liked;
 
     public PlaceShowBindingModel() {
@@ -66,5 +68,13 @@ public class PlaceShowBindingModel {
 
     public void setLiked(boolean liked) {
         this.liked = liked;
+    }
+
+    public Double getRating() {
+        return rating;
+    }
+
+    public void setRating(Double rating) {
+        this.rating = rating;
     }
 }

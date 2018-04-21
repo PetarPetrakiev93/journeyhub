@@ -25,7 +25,6 @@
                 <a th:href="@{/places/show/{id}(id=${place.id})}"><div class="grid-item justify-content-center" th:id="*{id}">
                     <img src="/upload-empty.png" class="img-thumbnail">
                     <h6 class="text-center" th:text="*{name}"></h6>
-                    <h6 class="text-center" th:text="*{text}"></h6>
                     <h6 class="text-center" th:text="${place.location.name}"></h6>
                 </div></a>
             </div>

@@ -22,24 +22,27 @@
     </div>
     <div class="container-fluid text-center">
         <h4 th:text="${place.text}"></h4>
-        <h4 th:text="${place.location}"></h4>
+        <h4 id="location" th:text="${place.location}"></h4>
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
-                    <div class="star-rating">
+                    <div class="star-rating" th:id="${place.id}">
                         <span class="fa fa-star-o" data-rating="1">&#9733;</span>
                         <span class="fa fa-star-o" data-rating="2">&#9733;</span>
                         <span class="fa fa-star-o" data-rating="3">&#9733;</span>
                         <span class="fa fa-star-o" data-rating="4">&#9733;</span>
                         <span class="fa fa-star-o" data-rating="5">&#9733;</span>
-                        <input type="hidden" name="whatever1" class="rating-value" value="2.56">
+                        <span>Rating: </span>
+                        <input name="whatever1" class="rating-value"
+                               th:value="${#numbers.formatDecimal(place.rating, 0, 2)}" disabled style="width: 50px">
                     </div>
                 </div>
             </div>
+
         </div>
         <div class="container">
             <div th:if="${place.liked}">
-                <a class="btn" disabled="disabled">&#128077;</a>
+                <a class="btn btn-basic" disabled="disabled">&#128077;</a>
             </div>
             <div th:unless="${place.liked}">
                 <a th:href="@{/places/like/{id}(id=${place.id})}" class="btn btn-warning">&#128077;</a>
@@ -47,12 +50,19 @@
             <a th:href="@{/places/edit/{id}(id=${place.id})}" class="btn btn-primary">Edit</a>
             <a th:href="@{/places/delete/{id}(id=${place.id})}" class="btn btn-danger">Delete</a>
         </div>
-        <div class="w3-content w3-display-container" style="width: 450px; margin-top: 35px" th:if="${place.images.size()} > 0">
-        <div th:each="image : ${place.images}">
-            <img class="mySlides" th:src="${image}" style="width:100%;">
-        </div>
-        <button class="w3-button w3-black w3-display-left" onclick="plusDivs(-1)">&#10094;</button>
-        <button class="w3-button w3-black w3-display-right" onclick="plusDivs(1)">&#10095;</button>
+        <div class="container">
+            <div class="row">
+            <div class="w3-content w3-display-container col-sm"
+                 style="width: 450px; margin-top: 35px; float:left; margin-left: 75px"
+                 th:if="${place.images.size()} > 0">
+                <div th:each="image : ${place.images}">
+                    <img class="mySlides" th:src="${image}" style="width:100%;">
+                </div>
+                <button class="w3-button w3-black w3-display-left" onclick="plusDivs(-1)">&#10094;</button>
+                <button class="w3-button w3-black w3-display-right" onclick="plusDivs(1)">&#10095;</button>
+            </div>
+            <div id="map" class="col-sm" style="float:right; margin-left: 50px; margin-right: 75px"></div>
+            </div>
         </div>
     </div>
 </div>
@@ -61,6 +71,8 @@
     <div th:replace="fragments/footer :: footer"></div>
 </div>
 <script src="/js/common/place-info.js"></script>
-
+<script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCsQ83MLlWTqZGxh3eTwyjuSEsBgSrtbk8&callback=initMap">
+</script>
 </body>
 </html>

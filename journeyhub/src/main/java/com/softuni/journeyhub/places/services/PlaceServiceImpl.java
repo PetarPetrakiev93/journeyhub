@@ -10,6 +10,7 @@ import com.softuni.journeyhub.places.exceptions.PlaceNotFoundException;
 import com.softuni.journeyhub.places.models.PlaceAddBindingModel;
 import com.softuni.journeyhub.places.models.PlaceEditBindingModel;
 import com.softuni.journeyhub.places.models.PlaceShowBindingModel;
+import com.softuni.journeyhub.places.models.RatingModel;
 import com.softuni.journeyhub.places.repositories.PlacePagingRepository;
 import com.softuni.journeyhub.places.repositories.PlaceRepository;
 import com.softuni.journeyhub.users.entities.User;
@@ -108,6 +109,7 @@ public class PlaceServiceImpl implements PlaceService {
             }
         }
         placeShowBindingModel.setLiked(isLiked);
+        placeShowBindingModel.setRating(placeShowBindingModel.getRating() / place.getRatingUpdates());
         placeShowBindingModel.setImages(new ArrayList<>());
         for (Image image : place.getImages()) {
             try {
@@ -167,6 +169,18 @@ public class PlaceServiceImpl implements PlaceService {
 
         user.getLikedPlaces().add(place);
         this.userService.update(user);
+    }
+
+    public RatingModel updateRaiting(Long id, RatingModel ratingModel){
+        if(ratingModel.getRating() > 5){
+            return null;
+        }
+        Place place = this.placeRepository.getOne(id);
+        place.setRatingUpdates(place.getRatingUpdates()+1);
+        place.setRating(place.getRating() + ratingModel.getRating());
+        this.placeRepository.save(place);
+        ratingModel.setRating(place.getRating()/place.getRatingUpdates());
+        return ratingModel;
     }
 
 }

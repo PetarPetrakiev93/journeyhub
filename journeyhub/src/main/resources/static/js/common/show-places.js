@@ -29,3 +29,4 @@ app.loadImages = (function loadImages(){
     }
     getImages()
 })();
+

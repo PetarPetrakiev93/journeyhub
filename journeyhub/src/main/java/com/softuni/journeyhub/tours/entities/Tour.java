@@ -1,6 +1,5 @@
 package com.softuni.journeyhub.tours.entities;
 
-import com.softuni.journeyhub.events.entities.Event;
 import com.softuni.journeyhub.places.entities.Place;
 
 import javax.persistence.*;
@@ -14,12 +13,6 @@ public class Tour {
     private Long id;
 
     private String name;
-
-    @ManyToMany(cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
-    @JoinTable(name = "tour_event",
-            joinColumns = @JoinColumn(name = "tour_id", referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(name = "event_id", referencedColumnName = "id"))
-    private List<Event> events;
 
     @ManyToMany(cascade = CascadeType.MERGE, fetch = FetchType.LAZY)
     @JoinTable(name = "tour_place",
@@ -50,14 +43,6 @@ public class Tour {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public List<Event> getEvents() {
-        return events;
-    }
-
-    public void setEvents(List<Event> events) {
-        this.events = events;
     }
 
     public List<Place> getPlaces() {
