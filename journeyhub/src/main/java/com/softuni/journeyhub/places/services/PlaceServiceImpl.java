@@ -61,14 +61,14 @@ public class PlaceServiceImpl implements PlaceService {
     }
 
     @Override
-    public void addPlace(PlaceAddBindingModel model) {
+    public Place addPlace(PlaceAddBindingModel model) {
         Converter<String, Location> getLocation = ctx -> this.locationService.getLocationByName(ctx.getSource());
         TypeMap<PlaceAddBindingModel, Place> placeTypeMap = this.modelMapper.typeMap(PlaceAddBindingModel.class, Place.class);
         placeTypeMap.addMappings(mapper -> mapper.using(getLocation).map(PlaceAddBindingModel::getLocation, Place::setLocation));
         Place place = placeTypeMap.map(model);
         place.setImages(new ArrayList<>());
         place = this.placeRepository.save(place);
-        if(model.getImages().length == 1 && !model.getImages()[0].getOriginalFilename().equals("")) {
+        if(!model.getImages()[0].getOriginalFilename().equals("")) {
             for (MultipartFile multipartFile : model.getImages()) {
                 try {
                     this.imageService.uploadPlaceImage(multipartFile, place);
@@ -77,6 +77,7 @@ public class PlaceServiceImpl implements PlaceService {
                 }
             }
         }
+        return place;
     }
 
     @Override
@@ -146,7 +147,7 @@ public class PlaceServiceImpl implements PlaceService {
         Place place = placeTypeMap.map(editBindingModel);
         place.setImages(this.placeRepository.getOne(place.getId()).getImages());
         place = this.placeRepository.save(place);
-        if(editBindingModel.getImages().length == 1 && !editBindingModel.getImages()[0].getOriginalFilename().equals("")) {
+        if(!editBindingModel.getImages()[0].getOriginalFilename().equals("")) {
             for (MultipartFile multipartFile : editBindingModel.getImages()) {
                 try {
                     this.imageService.uploadPlaceImage(multipartFile, place);

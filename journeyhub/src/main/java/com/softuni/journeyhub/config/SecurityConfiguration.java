@@ -25,6 +25,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                         .antMatchers("/locations", "/location/add").hasAnyRole("MODERATOR", "ADMIN")
                         .antMatchers("/place/add", "/places/edit/**", "/places/delete/**").hasAnyRole("MODERATOR", "ADMIN")
                         .antMatchers("/users/**").hasRole("ADMIN")
+                        .antMatchers("/forum/topic/delete/**").hasAnyRole("MODERATOR", "ADMIN")
                 .anyRequest().authenticated()
                 .and()
                 .csrf().disable()

@@ -38,11 +38,11 @@ public class TopicServiceImpl implements TopicService {
     }
 
     @Override
-    public void addTopic(TopicAdd topicAdd,String username) {
+    public Topic addTopic(TopicAdd topicAdd,String username) {
         Topic topic = new Topic();
         topic.setName(HtmlUtils.htmlEscape(topicAdd.getName()));
         topic.setCreator(username);
-        this.topicRepository.save(topic);
+        return this.topicRepository.save(topic);
     }
 
     @Override

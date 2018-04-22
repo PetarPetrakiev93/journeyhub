@@ -36,8 +36,11 @@
                 <td>
                     <button class="btn btn-default"><a th:href="@{/forum/{id}(id=${topic.id})}">View</a>
                     </button>
-                    <button class="btn btn-danger"><a th:href="@{/forum/topic/delete/{id}(id=${topic.id})}">Delete</a>
-                    </button>
+                    <div sec:authorize="hasAnyRole('MODERATOR', 'ADMIN')">
+                        <button class="btn btn-danger"><a
+                                th:href="@{/forum/topic/delete/{id}(id=${topic.id})}">Delete</a>
+                        </button>
+                    </div>
                 </td>
             </tr>
         </table>

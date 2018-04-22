@@ -9,7 +9,7 @@ import com.softuni.journeyhub.forum.model.TopicShow;
 import java.util.List;
 
 public interface TopicService {
-    void addTopic(TopicAdd topicAdd, String username);
+    Topic addTopic(TopicAdd topicAdd, String username);
     void deleteTopic(Long id);
     List<TopicShow> getAllTopics();
     ModelWithPosts getTopic(Long id);

@@ -12,7 +12,7 @@ import java.util.List;
 
 public interface PlaceService {
     List<String> getLocationsNames();
-    void addPlace(PlaceAddBindingModel place);
+    Place addPlace(PlaceAddBindingModel place);
     Page<Place> getAllPlacesByPage(Pageable pageable);
     Place getPlaceById(Long id);
     PlaceShowBindingModel getPlaceInfo(Long id,String name);
